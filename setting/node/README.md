@@ -11,7 +11,7 @@ node.js의 버전 관리자... 더이상의 설명은 필요가 없습니다... 
 ## mac install (brew)
 필자는 ``` brew ```를 사용하여 설치 하였다.  
 
-```
+```bash
 brew install nvm 
 ```
 
@@ -20,7 +20,7 @@ brew install nvm
 
 ![mac-erro](./images/mac-10.15-error.png)
 
-```
+```bash
 export NVM_DIR=~/.nvm
 source $(brew --prefix nvm)/nvm.sh
 ```
@@ -37,7 +37,7 @@ source $(brew --prefix nvm)/nvm.sh
 우선 최신 버전을 설치하여 사용해보겠습니다.
 설치 하고 보니 현재 기준 v14.15.0이 LTS버전이여서 추가 설치 했습니다.
 
-```
+```bash
 nvm install node # 필요버전이 있으시면 입력 하시면 되고 없으면 최신으로 설치 됩니다.
 
 nvm use node # 사용하고자 하는 node 버전으로 변경 합니다.
