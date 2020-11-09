@@ -16,7 +16,8 @@ brew install nvm
 ```
 
 하다가 nvm 설치시 오류가... ``` nvm: command not found ``` 발생   
-확인 결과 OS X 10.15 이상부터 zsh shell을 기본으로 사용하기 때문에 발생하는 불라불라 한다. 😂
+확인 결과 OS X 10.15 이상부터 zsh shell을 기본으로 사용하기 때문에 발생하는 불라불라 한다. 😂  
+
 ![mac-erro](./images/mac-10.15-error.png)
 
 ```
