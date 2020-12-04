@@ -3,12 +3,12 @@
 > https://docs.spring.io/spring-batch/docs/4.3.x/reference/html/index.html
 >https://terasoluna-batch.github.io/guideline/5.0.0.RELEASE/en/Ch02_SpringBatchArchitecture.html#Ch02_SpringBatchArch_Overview_SpringBatch
 
-## 1. What is batch application ? 
+## What is batch application ? 
 
 웹 어플리케이션을 많이 개발하다 보니 배치, 배치잡, 크론탭, 스케줄링 등 다양한 용어를 혼합하여 배치라고 부르고 있습니다. 저부터도...        
 [위키피디아](https://en.wikipedia.org/wiki/Batch_processing) 의 정의를 보면 **배치 프로세싱 이란 일괄 처리**라고 적혀있습니다.    
 주로 웹에서 배치라 함은 **정해진 주기(스케줄링)를 가지고 정해진 작업(Job)을 처리** 하는 것들을 말하죠.    
-가령 예를 들면 정산/마감, 통계, 메일발송 등을 이런 작업들을 모아서 일괄 처리 하도록 스케줄링을 합니다.  
+가령 예를 들면 매출집계, 통계, 메일발송 등을 이런 작업들을 모아서 일괄 처리 하도록 스케줄링을 합니다.  
 여기서 중요한 포인트는 스케줄링과 배치 프로세싱은 전혀 다르다는것 입니다. (저는 공부하면서 다시금 깨달았습니다.)    
 Spring scheduler(linux cron 같은놈)를 통해 **관리자 페이지 내부에 주로 사용자가 없는 시간에 정해진 주기를 두고,**  
 **위의 일괄처리가 필요한 작업들을 코드로 구현해 놓고 사용 했습니다.**
@@ -18,7 +18,7 @@ Spring scheduler(linux cron 같은놈)를 통해 **관리자 페이지 내부에
 배치,배치잡,배치 프로세싱은 원하는 작업을 구현해 놓은 비지니스 로직 구간 입니다. 즉 위의 스케줄러가 호출하게 될 실제 구현체 부분입니다.**    
 
 
-### 1-1 배치 애플리케이션의 조건
+### 배치 애플리케이션의 조건
 > 배치 애플리케이션은 아래의 조건을 만족해야 합니다.
 
 - **대용량 데이터 처리**: 대량의 데이터를 가져오고, 전달, 계산하는 등의 처리를 할 수 있어야 합니다.
@@ -27,9 +27,9 @@ Spring scheduler(linux cron 같은놈)를 통해 **관리자 페이지 내부에
 - **신뢰성**: 무엇이 잘못되었는지를 추적할 수 있어야 합니다.(로깅, 알림)
 - **성능**: 지정한 시간 안에 처리를 완료하거나, 동시에 실행되는 다른 애플리케이션에 영향 없이 수행되어야 합니다.
 
-## 2. Why should we use Spring Batch ?
+## What is Spring Batch ?
 Spring Batch는 엔터프라이즈 시스템의 일상적인 운영에 필수적인 강력한 배치 애플리케이션을 개발할 수 있도록 설계된 가볍고 포괄적 인 배치 프레임 워크입니다.  
-Spring Batch는 사람들이 기대하는 Spring Framework의 특성 (생산성, POJO 기반 개발 접근 방식 및 일반적인 사용 용이성)을 기반으로 구축되며, 개발자가 필요할 때 더 진보 된 엔터프라이즈 서비스에 쉽게 액세스하고 활용할 수 있도록 합니다.  
+Spring Batch는 사람들이 기대하는 Spring Framework의 특성을 기반으로 구축되며, 개발자가 필요할 때 더 진보 된 엔터프라이즈 서비스에 쉽게 액세스하고 활용할 수 있도록 합니다.  
 **Spring Batch는 스케줄링 프레임 워크가 아닙니다.**  
 상용 및 오픈 소스 공간 모두에서 사용할 수있는 좋은 엔터프라이즈 스케줄러 (예 : Quartz, Tivoli, Control-M 등)가 많이 있습니다.  
 **스케줄러를 대체하는 것이 아니라 스케줄러와 함께 작동하기위한 것입니다.**  
@@ -38,23 +38,56 @@ Spring Batch는 로깅 / 추적, 트랜잭션 관리, 작업 처리 통계, 작�
 또한 최적화 및 파티셔닝 기술을 통해 대용량 및 고성능 배치 작업을 가능하게하는 고급 기술 서비스 및 기능을 제공합니다.  
 Spring Batch는 단순한 사용 사례 (예 : 데이터베이스로 파일 읽기 또는 저장 프로 시저 실행)뿐만 아니라 복잡한 대용량 사용 사례 (예 : 데이터베이스간에 대량의 데이터 이동, 변환 등에서 사용할 수 있습니다.) 대용량 배치 작업은 확장 성이 뛰어난 방식으로 프레임 워크를 활용하여 많은 양의 정보를 처리 할 수 ​​있습니다.
 
-스프링 배치의 더 세부적인 내용을 확인하시려면 [Spring batch architecture](https://docs.spring.io/spring-batch/docs/4.3.x/reference/html/spring-batch-intro.html#springBatchArchitecture) 확인 하실 수 있습니다.   
-아래 설명드릴 내용도 다 나와 있습니다. 뭐라는건지... 어려운 소리만 자아안뜩 해놨어요.😤 
+## Why should we use Spring Batch ?
 
-## 3. Components of Spring Batch
-Spring Batch의 다양한 구성요소 그리고 연결 방식
-![spring-batch-components](./images/spring-batch-components.jpg)
+Spring Batch는 이러한 기본 배치 반복을 자동화하여 일반적으로 사용자 상호 작용없이 오프라인 환경에서 유사한 트랜잭션을 집합으로 처리 할 수있는 기능을 제공합니다.  
+배치 작업은 대부분의 IT 프로젝트의 일부이며 Spring Batch는 강력한 엔터프라이즈 급 솔루션을 제공하는 유일한 오픈 소스 프레임 워크입니다.
 
-위의 링크에서 매커니즘을 100% 이해하지 못해 Job Launcher, Job Repository는 우선 제외하겠습니다.  
-찾아봐도 아직 명쾌하게 설명드리기는 어렵네요... 😱
+비즈니스 시나리오
 
-### 3-1 Job
-배치 작업 그 자체 이며, 혹은 Flow 라고도 불립니다.    
-최소 하나의 Step을 가져야 하며 엄청나게 복잡한 Job이 아닌 이상 2-10개의 Step을 권장한다 (솔직히 10개도 너무 많다).
-아래 내용까지 보시면 아시겠지만 조졸두님 께서는 순차적인 작업들을 나눌때 Step을 통해 구분 하기 보다는,   
-Step들도 개별적인 동작을 할 수 있도록 구성하는 것이 좋다고 합니다.(유지보수의 편의성 및 추상화)
- 
+- 주기적으로 배치 프로세스 커밋
+- 동시 일괄 처리 : 작업의 병렬 처리
+- 단계별 엔터프라이즈 메시지 기반 처리
+- 대규모 병렬 일괄 처리
+- 실패 후 수동 또는 예약 된 재시작
+- 종속 단계의 순차적 처리 (워크 플로 기반 배치에 대한 확장 포함)
+- 부분 처리 : 레코드 건너 뛰기 (예 : 롤백시)
+- 배치 크기가 작거나 기존 저장 프로 시저 / 스크립트가있는 경우 전체 배치 트랜잭션
 
+기술 목표
+- 배치 개발자는 Spring 프로그래밍 모델을 사용합니다. **비즈니스 로직에 집중하여 프레임워크로 인프라를 관리**합니다.
+- 인프라스트럭처, 배치 실행 환경 및 배치 애플리케이션 간 우려사항의 명확한 분리.
+- 모든 프로젝트를 구현할 수 있는 인터페이스로서 공통의 핵심 실행 서비스를 제공합니다.
+- 핵심 실행 인터페이스의 심플하고 디폴트 실장을 제공하며, "개봉 후"에 사용할 수 있습니다.
+- 모든 레이어에서 스프링 프레임워크를 이용함으로써 서비스 설정, 커스터마이즈 및 확장이 용이합니다.
+- 기존의 모든 핵심 서비스는 인프라스트럭처 층에 영향을 주지 않고 쉽게 교체하거나 확장할 수 있어야 합니다.
+- Maven을 사용하여 구축된 아키텍처 JAR을 애플리케이션에서 완전히 분리한 심플한 배치 모델을 제공합니다.
+
+[스프링 배치 아키텍쳐](https://docs.spring.io/spring-batch/docs/4.3.x/reference/html/spring-batch-intro.html#springBatchArchitecture)를 한번 읽어 보시는것도 도움이 됩니다.
+
+---
+---
+--- 
+
+
+# The Domain Language of Batch
+
+## Components of Spring Batch
+![spring-batch-reference-model](./images/spring-batch-reference-model.png)
+
+🙄  위의 다이어그램은 Spring Batch의 도메인 언어를 구성하는 주요 개념을 나타내고 있습니다.  
+`Job`에는 1개 이상의 `Step`이 있고 각각 `ItemReader`, `ItemProcessor`, `Item Writer` 1개씩 있습니다.  
+`Job`의 실행은 `JobLauncher`를 사용하고, 현재 실행중인 프로세스에 관한 메터데이터를 `JobRepository`에 저장합니다.
+
+### Job
+`Job`은 배치 프로세스 전체를 캡슐화하는 엔티티 입니다.  
+다른 Spring 프로젝트와 마찬가지로 `Job`은 XML Configuration 파일 또는 Java 기반 Configuration과 함께 연결됩니다. 이 구성을 "작업 구성"이라고 부르기도 합니다.  
+그러나 아래 다이어 그램과 같이 `Job`은 전체 작업 계층 구조의 시작입니다.
+![job-heirarchy](./images/job-heirarchy.png)
+#여기까지 !!!!함 !!!!
+### Step 
+
+배치 장인 이동욱(jojoldu)님 께서는 순차적인 `Job`들을 나눌때 `Step`을 통해 구분 하기 보다는, `Step`들도 개별 적인 동작을 할 수 있도록 구성하는 것을 추천 합니다.(유지보수의 편의성 및 추상화)
 
 ### 2-1 !!!추가 기재필요 !!! Job, Step, Tasklet or (Reader, Processor, Writer)
 
