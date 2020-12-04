@@ -84,21 +84,22 @@ Spring Batch는 이러한 기본 배치 반복을 자동화하여 일반적으�
 
 # The Domain Language of Batch
 
-## Components of Spring Batch
+## Components   of Spring Batch
 ![spring-batch-reference-model](./images/spring-batch-reference-model.png)
 
 🙄  위의 다이어그램은 Spring Batch의 도메인 언어를 구성하는 주요 개념을 나타내고 있습니다.  
 `Job`에는 1개 이상의 `Step`이 있고 각각 `ItemReader`, `ItemProcessor`, `Item Writer` 1개씩 있습니다.  
 `Job`의 실행은 `JobLauncher`를 사용하고, 현재 실행중인 프로세스에 관한 메터데이터를 `JobRepository`에 저장합니다.
 
-### 2- Metadata table
+### Metadata table 
 > [schema for spring batch docs](https://docs.spring.io/spring-batch/docs/4.3.x/reference/html/schema-appendix.html#metaDataSchema)
-위 도큐먼트를 보시면 위의 `JobRepository`에 대해 좀더 이해를 하실수 있습니다.
-> 잠깐 설명 드리면 스프링 배치 내부에서 잡들에 대한 실행 히스토리들을 저장하고 남기는 부분을 말한다고 생각 하시면 됩니다.
+위 도큐먼트를 보시면 위의 `JobRepository`에 대해 좀더 이해를 하실수 있습니다.  
+> 잠깐 설명 드리면 스프링 배치 내부에서 잡들에 대한 실행 히스토리들을 저장하고 남기는 부분을 말한다고 생각 하시면 됩니다.  
 > 아래 ERD를 확인 하시고 대략적인 냄새를 맡아주세요 !!! 🤧😬😬  
 
 ![meta-data-erd](./images/meta-data-erd.png)
 
+---
 
 ### Job
 `Job`은 배치 프로세스 전체를 캡슐화하는 엔티티 입니다.  
