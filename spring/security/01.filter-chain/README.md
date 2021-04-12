@@ -32,6 +32,9 @@ DispatcherServlet으로 요청이 오기전에 우리는 Filter들을 구성할 
 
 ![security-filter-chaing](images/Untitled%201.png)
 
+다음 글에서는 시큐리티 필터 체인에 등록되는 필터들에 대해서 알아보겠습니다.
+
+
 > Documents
 
 [Spring Security Reference](https://docs.spring.io/spring-security/site/docs/current/reference/html5/#servlet-architecture)
